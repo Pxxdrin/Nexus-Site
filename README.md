@@ -1,2 +1,1 @@
-Website Nike - Pxdrin!
-Nesse projeto Compreendi melhor a lógica do Css, porém estou em evolução e aprendizagem ainda...
+Website Nike
