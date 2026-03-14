@@ -3,47 +3,513 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="descripition" content="Nike - Just do it - Motivação para atletas e entusiastas do esporte em todo o mundo.">
-    <title>Nike - Just do it.</title>
-    <link rel="stylesheet" href="https://pxxdrin.github.io/Website-Nike-Pxdrin/style.css">   
+    <title>NEXUS - Future of Performance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background: #0a0a0a;
+            color: white;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px #00f5ff); }
+            to { filter: drop-shadow(0 0 20px #ff00ff); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, #00f5ff, #ff00ff);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #00f5ff;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, #00f5ff20 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, #ff00ff20 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, #00ff8820 0%, transparent 50%);
+            animation: bgMove 20s ease-in-out infinite;
+        }
+
+        @keyframes bgMove {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00f5ff, #ffffff, #ff00ff, #00ff88);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite, float 6s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            color: black;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 1s both;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.4);
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, #00f5ff40, transparent);
+            border-radius: 50%;
+            animation: floatParticle 15s infinite linear;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Products Section */
+        .products {
+            padding: 120px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 80px;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .product-card:hover::before {
+            left: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-20px) scale(1.02);
+            border-color: #00f5ff;
+            box-shadow: 0 30px 60px rgba(0, 245, 255, 0.3);
+        }
+
+        .product-image {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: rotateY(360deg) scale(1.1);
+            box-shadow: 0 0 40px rgba(0, 245, 255, 0.6);
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#00f5ff, #ff00ff);
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-    <header class="cabecalho">
-        <a><img class="cabecalho-imagem" href="https://www.google.com.br/url?sa=i&url=https%3A%2F%2Flogosmarcas.net%2Fnike-logo%2F&psig=AOvVaw1jpNE0EM6NlJcAmH8UpjHW&ust=1683235393868000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCOikw_6K2v4CFQAAAAAdAAAAABAJ" alt="logo da nike"></a> 
-        <nav class="cabecalho-menu">
-            <p> <a class="cabecalho-menu-item" href="https://discord.gg" target="_blank"><b>Discord Nike</b></a></p> <!--https://discord.gg/nike-->
-            <p> <a class="cabecalho-menu-item" href="https://about.nike.com/en/newsroom"><b>Saiba Mais</b></a></p><!--https://about.nike.com/en/newsroom-->
-            <p><a class="cabecalho-menu-item" href="https://www.nike.com"><b>Site Oficial</b></a></p>                <!--https://www.nike.com-->
-            <p><a class="cabecalho-menu-item"href="https://www.cnnbrasil.com.br/tudo-sobre/nike/"><b>ㅤNotícias</b></a></p>                    <!--https://www.cnnbrasil.com.br/tudo-sobre/nike/-->
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">NEXUS</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#tech">Technology</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </nav>
     </header>
-    
-    <main class="conteudo">
-        <section class="conteudo-principal">
-            <div class="conteudo-pricnipal-escrito">
-                <h1 class="conteudo-principal-escrito-titulo">ㅤNIKE</h1>
-                <h2 class="conteudo-principal-escrito-subtiutlo">ㅤㅤㅤㅤㅤㅤㅤㅤㅤDesign, Fabricação, Marketing, Comércio de Moda e Artigos Esportivos.</h2>
-                <br>
-                ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ<a href="https://www.nike.com.br/"  target="_blank"><button class="botao-loja-nike">Visitar Loja</button></a>              
-            </div>
-            <br>           
-            ㅤㅤㅤㅤㅤㅤㅤㅤ<a href="https://www.nike.com/jordan" target="_blank"><button class="button-jordan"><img class="jordan-imagem" src="./jordan.svg" width="250"></button></a>
-        
-        </section>
-        <br>
-        <section class="conteudo-secundario">
-            <h3 class="conteudo-secundario-titulo">ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤSobreㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</h3>
-            <p class="conteudo=secundario-paragrafo">Nike é uma <b>marca global de artigos esportivos</b> conhecida por seus tênis, roupas e acessórios de <b>alta qualidade e design inovador.</b></p>
-            
-            <p class="conteudo=secundario-paragrafo">É conhecida por sua icônica logo "swoosh" e <b>patrocínio de atletas e equipes de renome mundial.</b></p>
-            <p class="conteudo=secundario-paragrafo">A empresa é <b>líder de mercado</b> na indústria de <b>artigos esportivos</b> e tem <b>presença global em mais de 190 países.</b></p>
-            <p class="conteudo=secundario-paragrafo">Não é apenas uma marca que <b>transcende o esporte</b>, mas também, um <b>ícone cultural.</b></p>
-        </section>
 
-    </main>
-    <br>
-    <footer class="rodape">
-        <img class="rodape-imagem" src="./nikejustdoit.svg">
-    </footer>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1 class="hero-title fade-in">FUTURE OF PERFORMANCE</h1>
+            <p class="hero-subtitle fade-in">Tecnologia revolucionária para atletas do futuro. Desempenho sem limites.</p>
+            <a href="#products" class="cta-button fade-in">
+                <i class="fas fa-rocket"></i> DESCUBRA AGORA
+            </a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <h2 class="section-title fade-in">PRODUTOS FUTURISTAS</h2>
+        <div class="products-grid">
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <i class="fas fa-running"></i>
+                </div>
+                <h3 class="product-title">NEXUS RUN X1</h3>
+                <div class="product-price">R$ 1.299</div>
+            </div>
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <h3 class="product-title">NEXUS FORCE PRO</h3>
+                <div class="product-price">R$ 1.599</div>
+            </div>
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <i class="fas fa-basketball-ball"></i>
+                </div>
+                <h3 class="product-title">NEXUS BOUNCE 9</h3>
+                <div class="product-price">R$ 1.199</div>
+            </div>
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <i class="fas fa-futbol"></i>
+                </div>
+                <h3 class="product-title">NEXUS SPEED ELITE</h3>
+                <div class="product-price">R$ 1.399</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Particles Animation
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Scroll Animations
+        function handleScroll() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+
+            // Header scroll effect
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                header.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for better performance
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('load', () => {
+            createParticles();
+            handleScroll();
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('mousemove', (e) => {
+            const hero = document.querySelector('.hero');
+            const x = (e.clientX / window.innerWidth) * 10;
+            const y = (e.clientY / window.innerHeight) * 10;
+            hero.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    </script>
 </body>
 </html>
